@@ -8,7 +8,7 @@ function CalendarHeader() {
     }
 
     return (
-        <div className="w-full h-16 flex items-center justify-between px-10">
+        <div className="w-full h-16 flex items-center justify-between">
             <h3 className="text-2xl font-medium">May 2021 <span className="text-gray-300 text-xl font-semibold">{'<>'}</span></h3>
 
             <div className="flex items-center justify-center w-48 h-2/3 bg-blue-100 rounded-lg px-1 text-sm text-center font-medium">

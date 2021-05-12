@@ -3,7 +3,7 @@ import Header from "./Header";
 
 function Mainbar() {
     return (
-        <div className="flex flex-col w-screen h-screen">
+        <div className="flex flex-col w-full h-full">
             <Header />
             <Calendar />
         </div>
