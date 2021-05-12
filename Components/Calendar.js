@@ -1,11 +1,11 @@
 import CalendarHeader from "./CalendarHeader";
-import WeekCalendar from "./WeekCalendar";
+import WeeklyCards from "./WeeklyCards";
 
-function Calendar() {
+function Calendar({ notes }) {
     return (
         <div className="w-full h-full flex flex-col items-center justify-self-start px-10">
             <CalendarHeader />
-            <WeekCalendar />
+            <WeeklyCards />
         </div>
     )
 }

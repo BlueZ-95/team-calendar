@@ -1,7 +1,7 @@
 import Calendar from "./Calendar";
 import Header from "./Header";
 
-function Mainbar() {
+function Mainbar({ notes }) {
     return (
         <div className="flex flex-col w-full h-full">
             <Header />
