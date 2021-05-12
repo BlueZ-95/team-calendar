@@ -2,9 +2,15 @@ import { useState } from "react"
 
 function CalendarHeader() {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
     const selectWeekOrMonth = (e, isWeekSelected) => {
         setIsWeekSelected(isWeekSelected);
+    }
+
+    const toggleAddNewNote = () => {
+        const showForm = isFormVisible ? false : true;
+        setIsFormVisible(showForm);
     }
 
     return (
@@ -16,9 +22,10 @@ function CalendarHeader() {
                     <span className={`block w-1/2 mx-1 py-1 cursor-pointer ${isWeekSelected ? 'rounded-md shadow-lg text-blue-500 bg-white' : 'text-gray-400'}`} onClick={e => selectWeekOrMonth(e, true)}>Week</span>
                     <span className={`block w-1/2 mx-1 py-1 cursor-pointer ${!isWeekSelected ? 'rounded-md shadow-lg text-blue-500 bg-white' : 'text-gray-400'}`} onClick={e => selectWeekOrMonth(e, false)}>Month</span>
                 </div>
-                <span className="w-10 h-10 bg-green-500 ml-5 rounded-lg cursor-pointer hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white">+</p></span>
 
-                <div className="absolute w-64 h-96 bg-green-300 top-16 rounded-xl p-5">
+                <span className="w-10 h-10 bg-green-500 ml-5 rounded-lg cursor-pointer hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white" onClick={() => toggleAddNewNote()}>+</p></span>
+
+                <div className={`${isFormVisible ? 'h-96 block' : 'h-0 hidden'} absolute w-64  bg-green-300 top-16 rounded-xl p-5 select-none`}>
                     <form>
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="author" placeholder="Author" type="text" />
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="cardContent" placeholder="Content" type="text" />
