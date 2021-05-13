@@ -38,8 +38,7 @@ function CalendarHeader({ addNote, days }) {
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="date" placeholder="Date" type="text" />
                         {/* <select className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="date">
                             {
-                                days &&
-                                days?.map(date => {
+                                days.map(date => {
                                     return <option key={date} value={date} text={date}></option>
                                 })
                             }
