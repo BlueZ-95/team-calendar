@@ -3,7 +3,7 @@ import { BsFillGridFill, BsCalendarFill, BsFillClockFill, BsFillShieldLockFill, 
 
 function Sidebar() {
     return (
-        <div className="h-screen w-16 border-r border-gray-200 flex flex-col items-center justify-between py-5">
+        <div className="fixed h-screen w-16 border-r border-gray-200 flex flex-col items-center justify-between py-5">
             {/* Logo */}
             <Image src="/Logo.svg" width={30} height={30} />
 

@@ -24,7 +24,7 @@ function Calendar() {
             
             setNotes(notes);
         });
-    }, []);
+    }, [notes]);
 
     const addNote = e => {
         e.preventDefault();
@@ -44,23 +44,25 @@ function Calendar() {
             hour: hour,
             month: month,
         }).then(res => {
-            // console.log('in then');
-            // var _notes = notes;
-            // if(!_notes.hasOwnProperty(day)) {
-            //     _notes[day] = new Array();
-            // }
-            
-            // _notes[day].push({
-            //     author: author,
-            //     cardContent: cardContent,
-            //     date: date,
-            //     day: day,
-            //     hour: hour,
-            //     month: month
-            // });
+            console.log('document added');
 
-            // setNotes(_notes);
-            Router.reload();
+            var _notes = notes;
+            if(!_notes.hasOwnProperty(day)) {
+                _notes[day] = new Array();
+            }
+            
+            _notes[day].push({
+                author: author,
+                cardContent: cardContent,
+                date: date,
+                day: day,
+                hour: hour,
+                month: month
+            });
+
+            setNotes(_notes);
+            console.log(notes);
+            // Router.reload();
 
         }).catch(err => {
             console.log(err);
