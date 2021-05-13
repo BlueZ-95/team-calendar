@@ -1,11 +1,12 @@
 function Card({ cardContent, time, author }) {
     return (
-        <div className="w-48 bg-[#E7F9E5] h-60 flex flex-col items-start justify-between rounded-md px-5 py-5 m-3 cursor-pointer shadow-sm hover:shadow-md">
-            <div className="w-12 h-12 ml-auto rounded-full bg-yellow-200"></div>
-            <span className="flex flex-col items-center justify-between h-1/2">
-                <p className="w-full text-3xl text-[#0090E1] font-medium">{cardContent}</p>
-                <p className="w-full text-sm text-gray-400 font-light">{time}</p>
+        <div className="w-48 bg-[#00DCB2] h-60 flex flex-col items-start justify-around rounded-md px-5 py-5 m-3 cursor-pointer shadow-sm transform duration-100 ease-out hover:shadow-lg hover:scale-105">
+            {/* <div className="w-8 h-8 ml-auto rounded-full bg-yellow-200"></div> */}
+            <span className="flex flex-col items-center justify-evenly h-1/2">
+                <p className="w-full text-3xl text-white font-medium">{cardContent}</p>
+                <p className="w-full text-sm text-white font-light">{time}</p>
             </span>
+            <p className="w-full text-xl text-white font-light">{author}</p>
         </div>
     )
 }

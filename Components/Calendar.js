@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 function Calendar() {
 
     const [notes, setNotes] = useState({});
+    const [weekDays, setWeekDays] = useState([]);
 
     useEffect(() => {
         let notes = {};
@@ -24,6 +25,20 @@ function Calendar() {
             });
             
             setNotes(notes);
+
+            //Get current week dates
+            let currDate = new Date();
+            let currentWeek = [];
+
+            for (let i = 1; i < 7; i++) {
+                let first = currDate.getDate() - currDate.getDay() + i;
+                let day = new Date(currDate.setDate(first));
+                currentWeek.push(day)
+            }
+
+            setWeekDays(currentWeek);
+            //
+
         });
     }, []);
 
@@ -71,8 +86,8 @@ function Calendar() {
 
     return (
         <div className="w-full h-full min-h-75 flex flex-col items-center justify-self-start px-10">
-            <CalendarHeader addNote={addNote} />
-            <WeeklyCards notes={notes} />
+            <CalendarHeader addNote={addNote} days={weekDays} />
+            <WeeklyCards notes={notes} days={weekDays} />
         </div>
     )
 }

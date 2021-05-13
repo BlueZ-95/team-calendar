@@ -9,16 +9,16 @@ function Sidebar() {
 
             {/* Menus */}
             <div className="flex flex-col items-center justify-evenly h-1/2 w-full">
-                <button className="w-full h-12 border-r-2 border-transparent border-opacity-0 outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] focus:text-[#00a6fb] focus:border-[#00a6fb]">
+                <button className="w-full h-12 border-r-2 outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] text-[#00a6fb] border-[#00a6fb]">
                     <BsFillGridFill />
                 </button>
-                <button className="w-full h-12 border-r-2 border-transparent border-opacity-0 outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] focus:text-[#00a6fb] focus:border-[#00a6fb]">
+                <button className="w-full h-12 border-r-2 border-transparent outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] focus:text-[#00a6fb] focus:border-[#00a6fb]">
                     <BsCalendarFill />
                 </button>
-                <button className="w-full h-12 border-r-2 border-transparent border-opacity-0 outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] focus:text-[#00a6fb] focus:border-[#00a6fb]">
+                <button className="w-full h-12 border-r-2 border-transparent outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] focus:text-[#00a6fb] focus:border-[#00a6fb]">
                     <BsFillClockFill />
                 </button>
-                <button className="w-full h-12 border-r-2 border-transparent border-opacity-0 outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] focus:text-[#00a6fb] focus:border-[#00a6fb]">
+                <button className="w-full h-12 border-r-2 border-transparent outline-none flex items-center justify-center text-xl cursor-pointer hover:text-[#00a6fb] focus:text-[#00a6fb] focus:border-[#00a6fb]">
                     <BsFillShieldLockFill />
                 </button>
             </div>
