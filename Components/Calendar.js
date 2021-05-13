@@ -69,7 +69,7 @@ function Calendar() {
     }
 
     return (
-        <div className="w-full h-full flex flex-col items-center justify-self-start px-10">
+        <div className="w-full h-full min-h-75 flex flex-col items-center justify-self-start px-10">
             <CalendarHeader addNote={addNote} />
             <WeeklyCards notes={notes} />
         </div>
