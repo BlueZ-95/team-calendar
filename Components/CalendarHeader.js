@@ -33,7 +33,7 @@ function CalendarHeader({ addNote }) {
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="day" placeholder="Day" type="text" />
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="hour" placeholder="Hour" type="text" />
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="month" placeholder="Month" type="text" />
-                        <button type="submit" className="w-full h-full text-white p-2 my-3 rounded-md bg-blue-500 ring-offset-4 ring-blue-500 ring-offset-green-300 focus:ring-2">Add New Note</button>
+                        <button type="submit" className="w-full h-full text-white p-2 my-3 rounded-md bg-blue-500 ring-offset-4 ring-blue-500 ring-offset-blue-300 focus:ring-2">Add New Note</button>
                     </form>
                 </div>
             </span>

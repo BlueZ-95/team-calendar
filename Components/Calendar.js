@@ -2,7 +2,6 @@ import CalendarHeader from "./CalendarHeader";
 import WeeklyCards from "./WeeklyCards";
 import firestore from "../Utilities/firebase";
 import { useEffect, useState } from "react";
-import Router from "next/router";
 
 function Calendar() {
 
@@ -24,7 +23,9 @@ function Calendar() {
             
             setNotes(notes);
         });
-    }, [notes]);
+    }, []);
+
+
 
     const addNote = e => {
         e.preventDefault();
@@ -61,8 +62,6 @@ function Calendar() {
             });
 
             setNotes(_notes);
-            console.log(notes);
-            // Router.reload();
 
         }).catch(err => {
             console.log(err);
