@@ -13,6 +13,12 @@ function CalendarHeader({ addNote }) {
         setIsFormVisible(showForm);
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addNote(e);
+        setIsFormVisible(false);
+    }
+
     return (
         <div className="w-full h-16 flex items-center justify-between">
             <h3 className="text-2xl font-medium">May 2021 <span className="text-gray-300 text-xl font-semibold">{'<>'}</span></h3>
@@ -26,7 +32,7 @@ function CalendarHeader({ addNote }) {
                 <span className="w-10 h-10 bg-blue-500 ml-5 rounded-lg cursor-pointer select-none hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white" onClick={() => toggleAddNewNote()}>+</p></span>
 
                 <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 h-96 bg-blue-300 top-16 rounded-lg p-5 select-none`}>
-                    <form onSubmit={addNote}>
+                    <form onSubmit={e => handleSubmit(e)}>
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="author" placeholder="Author" type="text" />
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="cardContent" placeholder="Content" type="text" />
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="date" placeholder="Date" type="text" />

@@ -9,23 +9,23 @@ function Calendar() {
 
     useEffect(() => {
         let notes = {};
-        // firestore.collection('notes').get().then(querySnapshot => {
-        //     querySnapshot.forEach(doc => {
-        //         var data = doc.data();
+        firestore.collection('notes').get().then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                var data = doc.data();
 
-        //         // check if day is already added in dictionary
-        //         if(!notes.hasOwnProperty(data.day)) {
-        //             notes[data.day] = new Array();
-        //         }
-                    
-        //         notes[data.day].push(data);
-        //     });
+                data['id'] = doc.id;
+
+                // check if day is already added in dictionary
+                if(!notes.hasOwnProperty(data.day)) {
+                    notes[data.day] = new Array();
+                }
+                
+                notes[data.day].push(data);
+            });
             
-        //     setNotes(notes);
-        // });
+            setNotes(notes);
+        });
     }, []);
-
-
 
     const addNote = e => {
         e.preventDefault();
@@ -45,14 +45,15 @@ function Calendar() {
             hour: hour,
             month: month,
         }).then(res => {
-            console.log('document added');
+            console.log(res.id);
 
-            var _notes = notes;
+            var _notes = { ...notes };
             if(!_notes.hasOwnProperty(day)) {
                 _notes[day] = new Array();
             }
             
             _notes[day].push({
+                id: res.id,
                 author: author,
                 cardContent: cardContent,
                 date: date,
