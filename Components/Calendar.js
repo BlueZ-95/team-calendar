@@ -9,20 +9,20 @@ function Calendar() {
 
     useEffect(() => {
         let notes = {};
-        firestore.collection('notes').get().then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                var data = doc.data();
+        // firestore.collection('notes').get().then(querySnapshot => {
+        //     querySnapshot.forEach(doc => {
+        //         var data = doc.data();
 
-                // check if day is already added in dictionary
-                if(!notes.hasOwnProperty(data.day)) {
-                    notes[data.day] = new Array();
-                }
+        //         // check if day is already added in dictionary
+        //         if(!notes.hasOwnProperty(data.day)) {
+        //             notes[data.day] = new Array();
+        //         }
                     
-                notes[data.day].push(data);
-            });
+        //         notes[data.day].push(data);
+        //     });
             
-            setNotes(notes);
-        });
+        //     setNotes(notes);
+        // });
     }, []);
 
 
