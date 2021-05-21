@@ -1,9 +1,27 @@
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Mainbar from '../Components/Mainbar';
 import Sidebar from '../Components/Sidebar';
+import Image from 'next/image';
 // https://dribbble.com/shots/15671749-Landing-Page-Hero-Animation
 
 export default function Home() {
+  const router = useRouter();
+
+  const [isUserFound, setIsUserFound] = useState(false)
+
+  useEffect(() => {
+
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+    if (!userDetails) {
+      router.push('/Login')
+    }
+    else {
+      setIsUserFound(true);
+    }
+  }, [])
   return (
     <div>
       <Head>
@@ -12,7 +30,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex">
+      <span className={`${isUserFound ? 'hidden' : 'flex'} h-screen w-screen items-center justify-center`}>
+        <Image src="/spinner.gif" width={80} height={80} />
+      </span>
+
+      <main className={`${!isUserFound ? 'hidden' : 'flex'}`}>
         {/* Sidebar */}
         <Sidebar />
 
