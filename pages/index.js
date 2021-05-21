@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Mainbar from '../Components/Mainbar';
-import Sidebar from '../Components/Sidebar';
+import Mainbar from '../components/Mainbar';
+import Sidebar from '../components/Sidebar';
 import Image from 'next/image';
 // https://dribbble.com/shots/15671749-Landing-Page-Hero-Animation
 

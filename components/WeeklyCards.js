@@ -14,7 +14,7 @@ function WeeklyCards({ notes, days }) {
                         <div key={index} className="w-1/6 h-full flex flex-col items-center justify-start">
                             <h1 className={`${today == days[index]?.getDate() ? 'font-semibold text-2xl text-gray-700' : 'font-medium text-2xl text-gray-500'}`}>{day} <p className="text-center text-base">{days[index]?.getDate()}</p></h1>
                             {
-                                notes.hasOwnProperty(day) && notes.Monday.map(note => {
+                                notes.hasOwnProperty(day) && notes[day].map(note => {
                                     return <Card key={note.id} cardContent={note.cardContent} time={note.hour} author={note.author} />
                                 })
                             }
