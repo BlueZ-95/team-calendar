@@ -45,9 +45,11 @@ function Calendar() {
     const addNote = e => {
         e.preventDefault();
 
-        const author = e.target.author.value;
-        const cardContent = e.target.cardContent.value;
+
         const date = e.target.date.value;
+        const cardContent = e.target.cardContent.value;
+
+        const author = e.target.author.value;
         const day = e.target.day.value;
         const hour = e.target.hour.value;
         const month = e.target.month.value;
