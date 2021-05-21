@@ -42,17 +42,23 @@ function Calendar() {
         });
     }, []);
 
-    const addNote = e => {
+    const addNote = (e, selectedDay) => {
         e.preventDefault();
-
 
         const date = e.target.date.value;
         const cardContent = e.target.cardContent.value;
 
-        const author = e.target.author.value;
-        const day = e.target.day.value;
+        const userDetails = JSON.parse(localStorage.getItem('userDetails')).userDetails;
+        const author = userDetails.userName;
+        const email = userDetails.email;
+
+        const day = selectedDay;
+
         const hour = e.target.hour.value;
-        const month = e.target.month.value;
+
+        var today = new Date();
+
+        const month = today.getMonth();;
 
         firestore.collection('notes').add({
             author: author,

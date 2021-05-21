@@ -2,7 +2,6 @@
 import Card from "./Card"
 
 function WeeklyCards({ notes, days }) {
-
     let weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let todayDate = new Date();
     let today = String(todayDate.getDate()).padStart(2, '0');
