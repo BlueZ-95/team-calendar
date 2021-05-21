@@ -6,6 +6,9 @@ module.exports = {
     extend: {
       minHeight: {
         '75': '75vh',
+      },
+      maxHeight: {
+        '75': '75vh'
       }
     },
   },
@@ -13,5 +16,7 @@ module.exports = {
     extend: {
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }
