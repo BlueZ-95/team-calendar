@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Mainbar from '../Components/Mainbar';
 import Sidebar from '../Components/Sidebar';
+// https://dribbble.com/shots/15671749-Landing-Page-Hero-Animation
 
 export default function Home() {
   return (
