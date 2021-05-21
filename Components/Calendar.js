@@ -1,6 +1,6 @@
 import CalendarHeader from "./CalendarHeader";
 import WeeklyCards from "./WeeklyCards";
-import firestore from "../Utilities/firebase";
+import { firestore } from "../Utilities/firebase";
 import { useEffect, useState } from "react";
 
 function Calendar() {
@@ -17,13 +17,13 @@ function Calendar() {
                 data['id'] = doc.id;
 
                 // check if day is already added in dictionary
-                if(!notes.hasOwnProperty(data.day)) {
+                if (!notes.hasOwnProperty(data.day)) {
                     notes[data.day] = new Array();
                 }
-                
+
                 notes[data.day].push(data);
             });
-            
+
             setNotes(notes);
 
             //Get current week dates
@@ -63,10 +63,10 @@ function Calendar() {
             console.log(res.id);
 
             var _notes = { ...notes };
-            if(!_notes.hasOwnProperty(day)) {
+            if (!_notes.hasOwnProperty(day)) {
                 _notes[day] = new Array();
             }
-            
+
             _notes[day].push({
                 id: res.id,
                 author: author,

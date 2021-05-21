@@ -9,5 +9,14 @@ var firebaseConfig = {
     appId: "1:193671148096:web:810063e47a52ff58d165a5"
 };
 
+var firebaseInit, firestore;
 
-export default !firebase.apps.length ? firebase.initializeApp(firebaseConfig).firestore() : firebase.app().firestore();
+if (!firebase.apps.length) {
+    firebaseInit = firebase.initializeApp(firebaseConfig);
+    firestore = firebaseInit.firestore();
+}
+else {
+    firestore = firebase.app().firestore()
+}
+
+export { firebaseInit, firestore }
