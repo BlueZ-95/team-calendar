@@ -13,14 +13,19 @@ export default function Home() {
 
   useEffect(() => {
 
-    let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    try {
+      let userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-    if (!userDetails) {
+      if (!userDetails) {
+        router.push('/Login')
+      }
+      else {
+        setIsUserFound(true);
+      }
+    } catch (error) {
       router.push('/Login')
     }
-    else {
-      setIsUserFound(true);
-    }
+
   }, [])
   return (
     <div>
