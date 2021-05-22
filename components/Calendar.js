@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 function Calendar() {
 
     const [notes, setNotes] = useState({});
-    const [weekDays, setWeekDays] = useState([]);
+    const [currentweekDates, setCurrentweekDates] = useState([]);
+
+    let weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     useEffect(() => {
         let notes = {};
@@ -17,11 +19,11 @@ function Calendar() {
                 data['id'] = doc.id;
 
                 // check if day is already added in dictionary
-                if (!notes.hasOwnProperty(data.day)) {
-                    notes[data.day] = new Array();
+                if (!notes.hasOwnProperty(weekDays[data.day])) {
+                    notes[weekDays[data.day]] = new Array();
+                    console.log(notes);
                 }
-
-                notes[data.day].push(data);
+                notes[weekDays[data.day]].push(data);
             });
 
             setNotes(notes);
@@ -36,7 +38,7 @@ function Calendar() {
                 currentWeek.push(day)
             }
 
-            setWeekDays(currentWeek);
+            setCurrentweekDates(currentWeek);
             //
 
         });
@@ -58,7 +60,7 @@ function Calendar() {
 
         var today = new Date();
 
-        const month = today.getMonth();;
+        const month = today.getMonth() + 1;
 
         firestore.collection('notes').add({
             author: author,
@@ -68,14 +70,13 @@ function Calendar() {
             hour: hour,
             month: month,
         }).then(res => {
-            console.log(res.id);
 
             var _notes = { ...notes };
-            if (!_notes.hasOwnProperty(day)) {
-                _notes[day] = new Array();
+            if (!_notes.hasOwnProperty(weekDays[day])) {
+                _notes[weekDays[day]] = new Array();
             }
 
-            _notes[day].push({
+            _notes[weekDays[day]].push({
                 id: res.id,
                 author: author,
                 cardContent: cardContent,
@@ -94,8 +95,8 @@ function Calendar() {
 
     return (
         <div className="w-full h-full min-h-75 flex flex-col items-center justify-self-start px-10">
-            <CalendarHeader addNote={addNote} days={weekDays} />
-            <WeeklyCards notes={notes} days={weekDays} />
+            <CalendarHeader addNote={addNote} currentWeekDates={currentweekDates} />
+            <WeeklyCards notes={notes} currentWeekDates={currentweekDates} weekDays={weekDays} />
         </div>
     )
 }

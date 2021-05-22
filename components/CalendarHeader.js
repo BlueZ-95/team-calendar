@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function CalendarHeader({ addNote, days }) {
+function CalendarHeader({ addNote, currentWeekDates }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
 
@@ -41,7 +41,7 @@ function CalendarHeader({ addNote, days }) {
                         <p>Select Date :</p>
                         <select className={"w-full h-8 p-2 my-2 rounded-md outline-none bg-white"} name="date">
                             {
-                                days.map((date, index) => {
+                                currentWeekDates.map((date, index) => {
                                     date = date.getDate();
                                     return (<option key={index} value={date} disabled={date < todayDate}>{date}</option>)
                                 })
