@@ -3,6 +3,7 @@ import { useState } from "react"
 function CalendarHeader({ addNote, currentWeekDates }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const [duration, setDuration] = useState(1);
 
     let today = new Date();
     let todayDate = String(today.getDate()).padStart(2, '0');
@@ -49,11 +50,10 @@ function CalendarHeader({ addNote, currentWeekDates }) {
                         </select>
                         <p>Content :</p>
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="cardContent" placeholder="Content" type="text" />
-                        {/* <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="date" placeholder="Date" type="text" /> */}
-                        {/* <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="day" placeholder="Day" type="text" /> */}
                         <p>Time :</p>
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="hour" placeholder="Hour" type="text" />
-                        {/* <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="month" placeholder="Month" type="text" /> */}
+                        <p>Duration ({duration} Hour) :</p>
+                        <input className={"rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"} type="range" name="duration" min="1" max="5" value={duration} onChange={e => { setDuration(e.target.value); }}></input>
                         <button type="submit" className="w-full h-full text-white p-2 my-3 rounded-md bg-indigo-500 ring-offset-4 ring-indigo-500 ring-offset-indigo-300 focus:ring-2">Add New Note</button>
                     </form>
                 </div>

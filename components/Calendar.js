@@ -55,11 +55,10 @@ function Calendar() {
         const email = userDetails.email;
 
         const day = selectedDay;
-
         const hour = e.target.hour.value;
+        const duration = e.target.duration.value;
 
         var today = new Date();
-
         const month = today.getMonth() + 1;
 
         firestore.collection('notes').add({
@@ -69,6 +68,7 @@ function Calendar() {
             day: day,
             hour: hour,
             month: month,
+            duration: duration
         }).then(res => {
 
             var _notes = { ...notes };
@@ -83,7 +83,8 @@ function Calendar() {
                 date: date,
                 day: day,
                 hour: hour,
-                month: month
+                month: month,
+                duration: duration
             });
 
             setNotes(_notes);
