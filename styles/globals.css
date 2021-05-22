@@ -13,13 +13,12 @@
 		  appearance: none;
 		height: 12px;
 		cursor: ew-resize;
-		background: #FFF;
-		box-shadow: -405px 0 0 400px rgba(99, 102, 241, var(--tw-bg-opacity));
+		background: rgba(99, 100, 240, 0.5);
+		box-shadow: -405px 0 0 400px rgba(99, 100, 240, 1);
 		border-radius: 50%;
-		
 	}
 
-	p,h1,h2,h3,h4,h5 {
+	p,h1,h2,h3,h4,h5,ul,span {
 		user-select: none;
 	}
 }

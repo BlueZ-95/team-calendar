@@ -3,7 +3,7 @@ import { useState } from "react";
 function CalendarHeader({ addNote, currentWeekDates }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
-    const [duration, setDuration] = useState(1);
+    const [duration, setDuration] = useState(2);
 
     let today = new Date();
     let todayDate = String(today.getDate()).padStart(2, '0');
@@ -54,8 +54,8 @@ function CalendarHeader({ addNote, currentWeekDates }) {
                         <p>Time :</p>
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="hour" placeholder="Hour" type="text" required />
                         <p>Duration ({duration} Hour) :</p>
-                        <input className={"rounded-lg overflow-hidden appearance-none bg-gray-200 h-3 w-full"} type="range" name="duration" min="1" max="5" value={duration} onChange={e => { setDuration(e.target.value); }}></input>
-                        <button type="submit" className="w-full h-full text-white p-2 my-3 rounded-md bg-indigo-500 ring-offset-4 ring-indigo-500 ring-offset-indigo-300 focus:ring-2">Add New Note</button>
+                        <input className={"rounded-lg overflow-hidden appearance-none bg-white h-3 w-full outline-none"} type="range" name="duration" min="1" max="5" value={duration} onChange={e => { setDuration(e.target.value); }}></input>
+                        <button type="submit" className="w-full h-full text-white p-2 my-3 rounded-md bg-indigo-500 ring-offset-4 ring-indigo-500 ring-offset-indigo-400 focus:ring-2">Add New Note</button>
                     </form>
                 </div>
             </span>

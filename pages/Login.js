@@ -1,17 +1,21 @@
-import { Router, useRouter } from 'next/router';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { firebaseInit, firestore } from "../Utilities/firebase";
 
 function Login() {
 
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
+    const [isRequestSent, setIsRequestSent] = useState(false);
 
     const router = useRouter();
 
     const handleSubmit = e => {
         e.preventDefault();
+        setIsRequestSent(true);
 
         if (isLoginFormVisible) {
+
             var loginEmail = e.target.loginEmail.value;
             var loginPassword = e.target.loginPassword.value;
 
@@ -55,6 +59,8 @@ function Login() {
                 console.log(err.message);
             });
         }
+
+        // setIsRequestSent(false);
     }
 
     const toggleLoginSignup = e => {
@@ -88,7 +94,10 @@ function Login() {
 
                     </form>
                     <span className="flex flex-col w-full items-center justify-center">
-                        <button form="loginSignupForm" className="w-1/2 h-10 bg-indigo-500 rounded text-white mt-10" type="submit">{isLoginFormVisible ? 'Login' : 'Signup'}</button>
+                        <span className={`${isRequestSent ? 'block' : 'hidden'} mt-10`}>
+                            <Image src="/spinner.gif" width={32} height={32} />
+                        </span>
+                        <button form="loginSignupForm" className={`${!isRequestSent ? 'block' : 'hidden'} w-1/2 h-10 bg-indigo-500 rounded text-white mt-10`} type="submit">{isLoginFormVisible ? 'Login' : 'Signup'}</button>
                         <button type="button" className="text-blue-500 cursor-pointer my-5" onClick={toggleLoginSignup}>{isLoginFormVisible ? 'Create account' : 'Already have account'}</button>
                     </span>
                 </span>
