@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 function Card({ cardContent, time, author, duration }) {
-    let cardColors = ['bg-indigo-400', 'bg-blue-400', 'bg-green-400', 'bg-red-400', 'bg-yellow-400', 'bg-purple-400'];
+    let cardColors = ['bg-indigo-400', 'bg-blue-400', 'bg-green-400', 'bg-red-400', 'bg-purple-400'];
     let cardHeight = getCardHeight(duration);
-    let randomSelectedColor = Math.floor(Math.random() * 6);
+    let randomSelectedColor = Math.floor(Math.random() * 5);
 
     // const [cardHeight, setCardHeight] = useState('52');
 

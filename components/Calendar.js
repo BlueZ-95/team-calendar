@@ -7,12 +7,26 @@ function Calendar() {
 
     const [notes, setNotes] = useState({});
     const [currentweekDates, setCurrentweekDates] = useState([]);
+    const [bookedSlots, setBookedSlots] = useState({})
 
     let weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let _bookedSlots = {
+        'Monday': [],
+        'Tuesday': [],
+        'Wednesday': [],
+        'Thursday': [],
+        'Friday': [],
+        'Saturday': []
+    }
+
+    let today = new Date();
+    let currentMonth = today.getMonth() + 1;
 
     useEffect(() => {
         let notes = {};
-        firestore.collection('notes').get().then(querySnapshot => {
+
+
+        firestore.collection('notes').where('month', '==', currentMonth).get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 var data = doc.data();
 
@@ -22,18 +36,24 @@ function Calendar() {
                 if (!notes.hasOwnProperty(weekDays[data.day])) {
                     notes[weekDays[data.day]] = new Array();
                 }
+
+                //set booked slots
+                if (JSON.parse(localStorage.getItem('userDetails')).userDetails.userName == data.author) {
+                    _bookedSlots[weekDays[data.day]].push({ 'hour': parseInt(data.hour), 'duration': parseInt(data.duration) });
+                }
+
                 notes[weekDays[data.day]].push(data);
             });
-
+            setBookedSlots(_bookedSlots);
             setNotes(notes);
 
             //Get current week dates
-            let currDate = new Date();
+            let currentDate = new Date();
             let currentWeek = [];
 
             for (let i = 1; i < 7; i++) {
-                let first = currDate.getDate() - currDate.getDay() + i;
-                let day = new Date(currDate.setDate(first));
+                let first = currentDate.getDate() - currentDate.getDay() + i;
+                let day = new Date(currentDate.setDate(first));
                 currentWeek.push(day)
             }
 
@@ -46,6 +66,7 @@ function Calendar() {
     const addNote = (e, selectedDay) => {
         e.preventDefault();
 
+        console.log(bookedSlots);
         const date = e.target.date.value;
         const cardContent = e.target.cardContent.value;
 
@@ -59,6 +80,23 @@ function Calendar() {
 
         var today = new Date();
         const month = today.getMonth() + 1;
+
+        let enableAddCard = true;
+
+        //check if slot is booked
+        bookedSlots[weekDays[day]].forEach(slots => {
+            for (let i = 0; i < slots.duration; i++) {
+                console.log('slot', slots.hour + i);
+                if (slots.hour + i == hour) {
+                    alert('cant add');
+                    enableAddCard = false;
+                    break;
+                }
+            }
+        });
+
+        if (!enableAddCard)
+            return;
 
         firestore.collection('notes').add({
             author: author,
@@ -85,6 +123,12 @@ function Calendar() {
                 month: month,
                 duration: duration
             });
+
+            //Update booked slot
+            let _bookedSlots = bookedSlots;
+            _bookedSlots[weekDays[day]].push({ 'hour': parseInt(hour), 'duration': parseInt(duration) });
+            console.log(_bookedSlots);
+            setBookedSlots({ ..._bookedSlots });
 
             setNotes(_notes);
 
