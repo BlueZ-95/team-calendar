@@ -77,10 +77,10 @@ function Login() {
     return (
         <main className="h-screen flex flex-col items-center justify-center bg-gray-50">
             <h1 className="text-xl mb-5">Team Calendar</h1>
-            <div className="bg-white w-1/4 h-3/4 rounded-xl shadow-xl py-8">
-                <h2 className="text-gray-700 text-3xl text-center">Login</h2>
+            <div className="bg-white rounded-xl shadow-xl py-8">
+                <h2 className="text-gray-700 text-3xl text-center">{isLoginFormVisible ? 'Login' : 'Signup'}</h2>
                 <span className="flex flex-col items-center justify-between">
-                    <form id="loginSignupForm" onSubmit={handleSubmit} className="flex flex-col items-center justify-start py-8 px-8 h-60 max-h-60">
+                    <form id="loginSignupForm" onSubmit={handleSubmit} className="flex flex-col items-center justify-start py-8 px-8 max-h-60">
 
                         {/* Login Inputs */}
                         <input className={`${isLoginFormVisible ? 'block' : 'hidden'} w-full bg-white px-2 border border-gray-400 rounded-lg my-2 py-1 outline-none focus:border-blue-700`} name="loginEmail" type="text" placeholder="Email" />
