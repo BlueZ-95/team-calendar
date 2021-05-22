@@ -87,8 +87,9 @@ function Calendar() {
         bookedSlots[weekDays[day]].forEach(slots => {
             for (let i = 0; i < slots.duration; i++) {
                 console.log('slot', slots.hour + i);
+                slots.hour = slots.hour > 12 ? slots.hour + 12 : 0;
                 if (slots.hour + i == hour) {
-                    alert('A slot at this time is already assigned');
+                    alert('You already assigned a task at this time slot');
                     enableAddCard = false;
                     break;
                 }
