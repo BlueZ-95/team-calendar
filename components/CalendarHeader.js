@@ -36,7 +36,7 @@ function CalendarHeader({ addNote, currentWeekDates }) {
 
                 <span className="w-10 h-10 bg-indigo-500 ml-5 rounded-lg cursor-pointer select-none hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white" onClick={() => toggleAddNewNote()}>+</p></span>
 
-                <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 top-16 rounded-lg select-none z-10 shadow-xl backdrop-filter backdrop-blur-2xl`}>
+                <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 top-16 rounded-lg select-none z-10 shadow-xl backdrop-filter backdrop-blur-2xl border border-indigo-200`}>
 
                     <form onSubmit={e => handleSubmit(e)} className="p-5">
                         {/* <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="author" placeholder="Author" type="text" /> */}
