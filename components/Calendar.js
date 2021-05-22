@@ -21,7 +21,6 @@ function Calendar() {
                 // check if day is already added in dictionary
                 if (!notes.hasOwnProperty(weekDays[data.day])) {
                     notes[weekDays[data.day]] = new Array();
-                    console.log(notes);
                 }
                 notes[weekDays[data.day]].push(data);
             });

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 
 function CalendarHeader({ addNote, currentWeekDates }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
@@ -36,8 +36,9 @@ function CalendarHeader({ addNote, currentWeekDates }) {
 
                 <span className="w-10 h-10 bg-indigo-500 ml-5 rounded-lg cursor-pointer select-none hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white" onClick={() => toggleAddNewNote()}>+</p></span>
 
-                <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 bg-gray-200 top-16 rounded-lg p-5 select-none z-10 shadow-2xl`}>
-                    <form onSubmit={e => handleSubmit(e)}>
+                <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 top-16 rounded-lg select-none z-10 shadow-xl backdrop-filter backdrop-blur-2xl`}>
+
+                    <form onSubmit={e => handleSubmit(e)} className="p-5">
                         {/* <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="author" placeholder="Author" type="text" /> */}
                         <p>Select Date :</p>
                         <select className={"w-full h-8 p-2 my-2 rounded-md outline-none bg-white"} name="date">
@@ -53,7 +54,7 @@ function CalendarHeader({ addNote, currentWeekDates }) {
                         <p>Time :</p>
                         <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="hour" placeholder="Hour" type="text" required />
                         <p>Duration ({duration} Hour) :</p>
-                        <input className={"rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"} type="range" name="duration" min="1" max="5" value={duration} onChange={e => { setDuration(e.target.value); }}></input>
+                        <input className={"rounded-lg overflow-hidden appearance-none bg-gray-200 h-3 w-full"} type="range" name="duration" min="1" max="5" value={duration} onChange={e => { setDuration(e.target.value); }}></input>
                         <button type="submit" className="w-full h-full text-white p-2 my-3 rounded-md bg-indigo-500 ring-offset-4 ring-indigo-500 ring-offset-indigo-300 focus:ring-2">Add New Note</button>
                     </form>
                 </div>
