@@ -46,7 +46,8 @@ function Login() {
                 }
 
                 firestore.collection('users').add({
-                    userDetails
+                    userName: userName,
+                    email: signupEmail
                 }).catch(err => {
                     console.log(err.code);
                     console.log(err.message);
