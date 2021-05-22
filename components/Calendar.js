@@ -88,7 +88,7 @@ function Calendar() {
             for (let i = 0; i < slots.duration; i++) {
                 console.log('slot', slots.hour + i);
                 if (slots.hour + i == hour) {
-                    alert('cant add');
+                    alert('A slot at this time is already assigned');
                     enableAddCard = false;
                     break;
                 }
