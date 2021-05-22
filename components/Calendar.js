@@ -86,7 +86,8 @@ function Calendar() {
         //check if slot is booked
         bookedSlots[weekDays[day]].forEach(slots => {
             for (let i = 0; i < slots.duration; i++) {
-                console.log('slot', slots.hour + i);
+
+                //If slot time is after 12:00 convert it to 24 hour time format
                 slots.hour = slots.hour > 12 ? slots.hour + 12 : 0;
                 if (slots.hour + i == hour) {
                     alert('You already assigned a task at this time slot');
