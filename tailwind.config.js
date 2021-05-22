@@ -4,6 +4,13 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      height: {
+        'c1': '10rem',
+        'c2': '12rem',
+        'c3': '14rem',
+        'c4': '16rem',
+        'c5': '18rem',
+      },
       minHeight: {
         '75': '75vh',
       },
