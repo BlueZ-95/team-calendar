@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { currentDate, currentYear, currentMonth } from "../Utilities/date_time_utils";
 
 function CalendarHeader({ addNote, currentWeekDates }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
-    const [duration, setDuration] = useState(2);
+
+    const [cardValues, setCardValues] = useState({
+        date: currentDate,
+        cardContent: '',
+        hour: '',
+        duration: '2'
+    });
+
+    const cardValuesRef = useRef(cardValues);
+
+    const inputChangeHandler = e => {
+        let value = e.target.value;
+        var _cardValues = { ...cardValues };
+        _cardValues[e.target.name] = value;
+        cardValuesRef.current = _cardValues;
+        setCardValues(_cardValues);
+    }
 
     const selectWeekOrMonth = (e, isWeekSelected) => {
         setIsWeekSelected(isWeekSelected);
@@ -15,10 +31,10 @@ function CalendarHeader({ addNote, currentWeekDates }) {
         setIsFormVisible(showForm);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
-        let selectedDay = e.target.date.selectedIndex;
-        addNote(e, selectedDay);
+        //let selectedDay = e.target.date.selectedIndex;
+        addNote(e, cardValuesRef.current);
         setIsFormVisible(false);
     }
 
@@ -39,7 +55,7 @@ function CalendarHeader({ addNote, currentWeekDates }) {
                     <form onSubmit={e => handleSubmit(e)} className="p-5">
                         {/* <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="author" placeholder="Author" type="text" /> */}
                         <p>Select Date :</p>
-                        <select className={"w-full h-8 p-2 my-2 rounded-md outline-none bg-white"} name="date">
+                        <select className={"w-full h-8 p-2 my-2 rounded-md outline-none bg-white"} name="date" value={cardValues.selectedDate} onChange={inputChangeHandler}>
                             {
                                 currentWeekDates.map((date, index) => {
                                     date = date;
@@ -48,11 +64,11 @@ function CalendarHeader({ addNote, currentWeekDates }) {
                             }
                         </select>
                         <p>Content :</p>
-                        <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="cardContent" placeholder="Content" type="text" required />
+                        <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="cardContent" placeholder="Content" value={cardValues.cardContent} onChange={inputChangeHandler} type="text" required />
                         <p>Time :</p>
-                        <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="hour" placeholder="Hour" type="text" required />
-                        <p>Duration ({duration} Hour) :</p>
-                        <input className={"rounded-lg overflow-hidden appearance-none bg-white h-3 w-full outline-none"} type="range" name="duration" min="1" max="5" value={duration} onChange={e => { setDuration(e.target.value); }}></input>
+                        <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="hour" placeholder="Hour" value={cardValues.hour} onChange={inputChangeHandler} type="text" required />
+                        <p>Duration ({cardValues.duration} Hour) :</p>
+                        <input className={"rounded-lg overflow-hidden appearance-none bg-white h-3 w-full outline-none"} type="range" name="duration" min="1" max="5" value={cardValues.duration} onChange={inputChangeHandler}></input>
                         <button type="submit" className="w-full h-full text-white p-2 my-3 rounded-md bg-indigo-500 ring-offset-4 ring-indigo-500 ring-offset-indigo-400 focus:ring-2">Add New Note</button>
                     </form>
                 </div>

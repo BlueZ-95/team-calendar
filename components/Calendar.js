@@ -43,53 +43,48 @@ function Calendar() {
             setBookedSlots(_bookedSlots);
             setNotes(notes);
 
-            // //Get current week dates
-            // let currentDate = new Date();
-            // let currentWeek = [];
-
-            // for (let i = 1; i < 7; i++) {
-            //     let first = currentDate.getDate() - currentDate.getDay() + i;
-            //     let day = new Date(currentDate.setDate(first));
-            //     currentWeek.push(day)
-            // }
-
             setCurrentweekDates(currentWeekDays);
             //
 
         });
     }, []);
 
-    const addNote = (e, selectedDay) => {
+    const addNote = (e, cardValues) => {
         e.preventDefault();
-
-        const date = e.target.date.value;
-        const cardContent = e.target.cardContent.value;
+        console.log(cardValues);
+        const date = cardValues.date;
+        const cardContent = cardValues.cardContent;
 
         const userDetails = JSON.parse(localStorage.getItem('userDetails')).userDetails;
         const author = userDetails.userName;
 
-        const day = weekDays[selectedDay];
-        const hour = e.target.hour.value;
-        const duration = e.target.duration.value;
+        const day = weekDays[currentWeekDays.indexOf(parseInt(cardValues.date))];
+        const hour = cardValues.hour;
+        const duration = cardValues.duration;
 
         const month = currentMonth;
 
         let enableAddCard = true;
-
-        console.log('Booked Slots', bookedSlots);
+        console.log(bookedSlots);
+        console.log(day);
         //check if slot is booked
         bookedSlots[day].forEach(slots => {
             for (let i = 0; i < slots.duration; i++) {
-
+                slots.hour += i;
                 //If slot time is after 12:00 set it from 1:00
                 slots.hour = slots.hour > 12 ? 1 : slots.hour;
-                if (slots.hour + i == hour) {
+                console.log(slots.hour, i);
+                if (slots.hour == hour) {
                     alert('You already assigned a task at this time slot');
                     enableAddCard = false;
                     break;
                 }
             }
         });
+
+        console.log();
+
+        console.log('Booked Slot on ' + day, bookedSlots[day]);
 
         if (!enableAddCard)
             return;
@@ -104,12 +99,12 @@ function Calendar() {
             duration: duration
         }).then(res => {
 
-            var _notes = { ...notes };
-            if (!_notes.hasOwnProperty(weekDays[selectedDay])) {
-                _notes[weekDays[selectedDay]] = new Array();
+            var _notes = notes;
+            if (!_notes.hasOwnProperty(day)) {
+                _notes[day] = new Array();
             }
 
-            _notes[weekDays[selectedDay]].push({
+            _notes[day].push({
                 id: res.id,
                 author: author,
                 cardContent: cardContent,
@@ -126,7 +121,7 @@ function Calendar() {
 
             setBookedSlots({ ..._bookedSlots });
 
-            setNotes(_notes);
+            setNotes({ ..._notes });
 
         }).catch(err => {
             console.log(err);
