@@ -2,6 +2,7 @@ import CalendarHeader from "./CalendarHeader";
 import WeeklyCards from "./WeeklyCards";
 import { firestore } from "../Utilities/firebase";
 import { useEffect, useState } from "react";
+import { weekDays, currentMonth, currentWeekDays, currentDay } from "../Utilities/date_time_utils";
 
 function Calendar() {
 
@@ -9,7 +10,7 @@ function Calendar() {
     const [currentweekDates, setCurrentweekDates] = useState([]);
     const [bookedSlots, setBookedSlots] = useState({})
 
-    let weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    //let weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let _bookedSlots = {
         'Monday': [],
         'Tuesday': [],
@@ -19,13 +20,8 @@ function Calendar() {
         'Saturday': []
     }
 
-    let today = new Date();
-    let currentMonth = today.getMonth() + 1;
-
     useEffect(() => {
         let notes = {};
-
-
         firestore.collection('notes').where('month', '==', currentMonth).get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 var data = doc.data();
@@ -33,31 +29,31 @@ function Calendar() {
                 data['id'] = doc.id;
 
                 // check if day is already added in dictionary
-                if (!notes.hasOwnProperty(weekDays[data.day])) {
-                    notes[weekDays[data.day]] = new Array();
+                if (!notes.hasOwnProperty(data.day)) {
+                    notes[data.day] = new Array();
                 }
 
                 //set booked slots
                 if (JSON.parse(localStorage.getItem('userDetails')).userDetails.userName == data.author) {
-                    _bookedSlots[weekDays[data.day]].push({ 'hour': parseInt(data.hour), 'duration': parseInt(data.duration) });
+                    _bookedSlots[data.day].push({ 'hour': parseInt(data.hour), 'duration': parseInt(data.duration) });
                 }
 
-                notes[weekDays[data.day]].push(data);
+                notes[data.day].push(data);
             });
             setBookedSlots(_bookedSlots);
             setNotes(notes);
 
-            //Get current week dates
-            let currentDate = new Date();
-            let currentWeek = [];
+            // //Get current week dates
+            // let currentDate = new Date();
+            // let currentWeek = [];
 
-            for (let i = 1; i < 7; i++) {
-                let first = currentDate.getDate() - currentDate.getDay() + i;
-                let day = new Date(currentDate.setDate(first));
-                currentWeek.push(day)
-            }
+            // for (let i = 1; i < 7; i++) {
+            //     let first = currentDate.getDate() - currentDate.getDay() + i;
+            //     let day = new Date(currentDate.setDate(first));
+            //     currentWeek.push(day)
+            // }
 
-            setCurrentweekDates(currentWeek);
+            setCurrentweekDates(currentWeekDays);
             //
 
         });
@@ -66,28 +62,26 @@ function Calendar() {
     const addNote = (e, selectedDay) => {
         e.preventDefault();
 
-        console.log(bookedSlots);
         const date = e.target.date.value;
         const cardContent = e.target.cardContent.value;
 
         const userDetails = JSON.parse(localStorage.getItem('userDetails')).userDetails;
         const author = userDetails.userName;
-        const email = userDetails.email;
 
-        const day = selectedDay;
+        const day = weekDays[selectedDay];
         const hour = e.target.hour.value;
         const duration = e.target.duration.value;
 
-        var today = new Date();
-        const month = today.getMonth() + 1;
+        const month = currentMonth;
 
         let enableAddCard = true;
 
+        console.log('Booked Slots', bookedSlots);
         //check if slot is booked
-        bookedSlots[weekDays[day]].forEach(slots => {
+        bookedSlots[day].forEach(slots => {
             for (let i = 0; i < slots.duration; i++) {
 
-                //If slot time is after 12:00 convert it to 24 hour time format
+                //If slot time is after 12:00 set it from 1:00
                 slots.hour = slots.hour > 12 ? 1 : slots.hour;
                 if (slots.hour + i == hour) {
                     alert('You already assigned a task at this time slot');
@@ -111,11 +105,11 @@ function Calendar() {
         }).then(res => {
 
             var _notes = { ...notes };
-            if (!_notes.hasOwnProperty(weekDays[day])) {
-                _notes[weekDays[day]] = new Array();
+            if (!_notes.hasOwnProperty(weekDays[selectedDay])) {
+                _notes[weekDays[selectedDay]] = new Array();
             }
 
-            _notes[weekDays[day]].push({
+            _notes[weekDays[selectedDay]].push({
                 id: res.id,
                 author: author,
                 cardContent: cardContent,
@@ -128,8 +122,8 @@ function Calendar() {
 
             //Update booked slot
             let _bookedSlots = bookedSlots;
-            _bookedSlots[weekDays[day]].push({ 'hour': parseInt(hour), 'duration': parseInt(duration) });
-            console.log(_bookedSlots);
+            _bookedSlots[day].push({ 'hour': parseInt(hour), 'duration': parseInt(duration) });
+
             setBookedSlots({ ..._bookedSlots });
 
             setNotes(_notes);

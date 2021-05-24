@@ -1,14 +1,10 @@
 import { useState } from "react";
+import { currentDate, currentYear, currentMonth } from "../Utilities/date_time_utils";
 
 function CalendarHeader({ addNote, currentWeekDates }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [duration, setDuration] = useState(2);
-
-    let today = new Date();
-    let todayDate = String(today.getDate()).padStart(2, '0');
-    let currentMonth = today.getMonth() + 1;
-    let currentYear = today.getFullYear();
 
     const selectWeekOrMonth = (e, isWeekSelected) => {
         setIsWeekSelected(isWeekSelected);
@@ -46,8 +42,8 @@ function CalendarHeader({ addNote, currentWeekDates }) {
                         <select className={"w-full h-8 p-2 my-2 rounded-md outline-none bg-white"} name="date">
                             {
                                 currentWeekDates.map((date, index) => {
-                                    date = date.getDate();
-                                    return (<option key={index} value={date} disabled={date < todayDate}>{date}</option>)
+                                    date = date;
+                                    return (<option key={index} value={date} disabled={date < currentDate}>{date}</option>)
                                 })
                             }
                         </select>
