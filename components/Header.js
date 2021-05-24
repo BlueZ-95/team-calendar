@@ -10,6 +10,9 @@ function Header() {
     const [userDetails, setUserDetails] = useState({});
     const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
 
+    const today = new Date();
+    const currentHour = today.getHours();
+
     useEffect(() => {
         let rawUserDetails = localStorage.getItem('userDetails');
         if (rawUserDetails) {
@@ -52,7 +55,7 @@ function Header() {
 
     return (
         <div className="flex items-center justify-between w-full h-16 border-b border-gray-200 px-10">
-            <h1 className="text-md font-medium">Good Morning, {userDetails.userName}</h1>
+            <h1 className="text-md font-medium">Good {currentHour > 18 ? 'Evening' : currentHour > 12 ? 'Afternoon' : 'Morning'}, {userDetails.userName}</h1>
             <div onClick={toggleProfileMenu} className={`relative w-10 h-10 rounded-full bg-green-300 cursor-pointer`}>
                 <ul onClick={handleMenuClick} className={`transform ${isProfileMenuVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute bg-white border border-gray-300 border-opacity-50 shadow-xl rounded-md top-12 right-1 z-20`}>
                     <li className="py-1 px-4 hover:bg-gray-100 cursor-pointer">Profile</li>

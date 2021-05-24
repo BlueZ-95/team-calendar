@@ -19,14 +19,21 @@ function Login() {
             var loginEmail = e.target.loginEmail.value;
             var loginPassword = e.target.loginPassword.value;
 
-            console.log(loginEmail);
-
             firebaseInit.auth().signInWithEmailAndPassword(loginEmail, loginPassword).then(res => {
                 firestore.collection('users').where('email', '==', loginEmail).get().then(snapshot => {
                     setUserDetailsToLocal((snapshot.docs[0].data()));
                 })
             }).catch(err => {
-                console.log(err.message);
+                if (err.code === 'auth/user-not-found') {
+                    alert('User not found');
+                }
+                else if (err.code === 'auth/wrong-password') {
+                    alert('Wrong password');
+                }
+                else {
+                    console.log(err.message);
+                }
+                setIsRequestSent(false);
             })
         }
         else {
@@ -35,8 +42,10 @@ function Login() {
             var signupPassword = e.target.signupPassword.value;
             var signupConfirmPassword = e.target.signupConfirmPassword.value;
 
-            if (signupPassword !== signupConfirmPassword)
+            if (signupPassword !== signupConfirmPassword) {
+                alert('Password does not match');
                 return;
+            }
 
             firebaseInit.auth().createUserWithEmailAndPassword(signupEmail, signupPassword).then(res => {
 
