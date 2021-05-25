@@ -9,6 +9,7 @@ function Calendar() {
     const [notes, setNotes] = useState({});
     const [currentweekDates, setCurrentweekDates] = useState([]);
     const [bookedSlots, setBookedSlots] = useState({});
+    const [isMyCardsFilterEnabled, setIsMyCardsFilterEnabled] = useState(false);
 
     let _bookedSlots = {
         'Monday': [],

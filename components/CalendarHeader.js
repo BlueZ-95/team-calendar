@@ -49,9 +49,9 @@ function CalendarHeader({ addNote, currentWeekDates }) {
             <h3 className="text-2xl font-medium">{currentMonth} {currentYear}</h3>
 
             <span className="relative h-full flex items-center justify-between">
+
                 <p className="mx-2 text-gray-700 text-sm text-center font-medium">Toggle My Cards :</p>
                 <div className="relative w-12 h-6 bg-indigo-200 rounded-full cursor-pointer" onClick={toggleMyCardsFilter}>
-
                     <span className={`transform ${isMyCardsFilterEnabled && 'translate-x-6'} left-1 absolute top-1 w-4 h-4 rounded-full bg-indigo-600 transition duration-150 ease-out`}></span>
                 </div>
 
