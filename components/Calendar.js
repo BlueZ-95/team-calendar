@@ -51,7 +51,6 @@ function Calendar() {
 
     const addNote = (e, cardValues) => {
         e.preventDefault();
-        console.log(cardValues);
         const date = cardValues.date;
         const cardContent = cardValues.cardContent;
 
@@ -65,26 +64,23 @@ function Calendar() {
         const month = currentMonth;
 
         let enableAddCard = true;
-        console.log(bookedSlots);
-        console.log(day);
         //check if slot is booked
         bookedSlots[day].forEach(slots => {
             for (let i = 0; i < slots.duration; i++) {
-                slots.hour += i;
+                let _hour = slots.hour;
+                _hour += i;
+                console.log(_hour);
                 //If slot time is after 12:00 set it from 1:00
-                slots.hour = slots.hour > 12 ? 1 : slots.hour;
-                console.log(slots.hour, i);
-                if (slots.hour == hour) {
+                _hour = _hour > 12 ? _hour - 12 : _hour;
+
+                console.log(_hour, i);
+                if (_hour == hour) {
                     alert('You already assigned a task at this time slot');
                     enableAddCard = false;
                     break;
                 }
             }
         });
-
-        console.log();
-
-        console.log('Booked Slot on ' + day, bookedSlots[day]);
 
         if (!enableAddCard)
             return;

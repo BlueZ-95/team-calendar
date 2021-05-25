@@ -19,7 +19,8 @@ function CalendarHeader({ addNote, currentWeekDates }) {
         var _cardValues = { ...cardValues };
         _cardValues[e.target.name] = value;
         cardValuesRef.current = _cardValues;
-        setCardValues(_cardValues);
+        console.log('Ref', cardValuesRef.current);
+        setCardValues(cardValuesRef.current);
     }
 
     const selectWeekOrMonth = (e, isWeekSelected) => {
