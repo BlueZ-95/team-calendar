@@ -15,6 +15,8 @@ export const currentYear = today.getFullYear();
 
 export const currentWeekDays = getCurrentWeekDays();
 
+export const currentHour = today.getHours();
+
 
 function getCurrentWeekDays() {
 

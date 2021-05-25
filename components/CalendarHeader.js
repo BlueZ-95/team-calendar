@@ -4,6 +4,7 @@ import { currentDate, currentYear, currentMonth } from "../Utilities/date_time_u
 function CalendarHeader({ addNote, currentWeekDates }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const [isMyCardsFilterEnabled, setIsMyCardsFilterEnabled] = useState(false);
 
     const [cardValues, setCardValues] = useState({
         date: currentDate,
@@ -27,6 +28,10 @@ function CalendarHeader({ addNote, currentWeekDates }) {
         setIsWeekSelected(isWeekSelected);
     }
 
+    const toggleMyCardsFilter = () => {
+        setIsMyCardsFilterEnabled(isMyCardsFilterEnabled ? false : true);
+    }
+
     const toggleAddNewNote = () => {
         const showForm = isFormVisible ? false : true;
         setIsFormVisible(showForm);
@@ -44,12 +49,18 @@ function CalendarHeader({ addNote, currentWeekDates }) {
             <h3 className="text-2xl font-medium">{currentMonth} {currentYear}</h3>
 
             <span className="relative h-full flex items-center justify-between">
-                <div className="flex items-center justify-center w-48 h-2/3 bg-blue-100 rounded-lg px-1 text-sm text-center font-medium">
+                <p className="mx-2 text-gray-700 text-sm text-center font-medium">Toggle My Cards :</p>
+                <div className="relative w-12 h-6 bg-indigo-200 rounded-full cursor-pointer" onClick={toggleMyCardsFilter}>
+
+                    <span className={`transform ${isMyCardsFilterEnabled && 'translate-x-6'} left-1 absolute top-1 w-4 h-4 rounded-full bg-indigo-600 transition duration-150 ease-out`}></span>
+                </div>
+
+                <div className="flex items-center justify-center w-48 h-2/3 bg-blue-100 rounded-lg px-1 mx-5 text-sm text-center font-medium">
                     <span className={`block w-1/2 mx-1 py-1 cursor-pointer transition duration-200 ease-out ${isWeekSelected ? 'rounded-md shadow-lg text-indigo-500 bg-white' : 'text-gray-400'}`} onClick={e => selectWeekOrMonth(e, true)}>Week</span>
                     <span className={`block w-1/2 mx-1 py-1 cursor-pointer transition duration-200 ease-out ${!isWeekSelected ? 'rounded-md shadow-lg text-indigo-500 bg-white' : 'text-gray-400'}`} onClick={e => selectWeekOrMonth(e, false)}>History</span>
                 </div>
 
-                <span className="w-10 h-10 bg-indigo-500 ml-5 rounded-lg cursor-pointer select-none hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white" onClick={() => toggleAddNewNote()}>+</p></span>
+                <span className="w-10 h-10 bg-indigo-500 rounded-lg cursor-pointer select-none hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white" onClick={() => toggleAddNewNote()}>+</p></span>
 
                 <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 top-16 rounded-lg select-none z-10 shadow-xl backdrop-filter backdrop-blur-2xl border border-gray-300 border-opacity-25`}>
 

@@ -2,15 +2,14 @@ import CalendarHeader from "./CalendarHeader";
 import WeeklyCards from "./WeeklyCards";
 import { firestore } from "../Utilities/firebase";
 import { useEffect, useState } from "react";
-import { weekDays, currentMonth, currentWeekDays, currentDay } from "../Utilities/date_time_utils";
+import { weekDays, currentMonth, currentWeekDays } from "../Utilities/date_time_utils";
 
 function Calendar() {
 
     const [notes, setNotes] = useState({});
     const [currentweekDates, setCurrentweekDates] = useState([]);
-    const [bookedSlots, setBookedSlots] = useState({})
+    const [bookedSlots, setBookedSlots] = useState({});
 
-    //let weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let _bookedSlots = {
         'Monday': [],
         'Tuesday': [],
