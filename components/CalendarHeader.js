@@ -55,14 +55,14 @@ function CalendarHeader({ addNote, currentWeekDates }) {
                     <span className={`transform ${isMyCardsFilterEnabled && 'translate-x-6'} left-1 absolute top-1 w-4 h-4 rounded-full bg-indigo-600 transition duration-150 ease-out`}></span>
                 </div>
 
-                <div className="flex items-center justify-center w-48 h-2/3 bg-blue-100 rounded-lg px-1 mx-5 text-sm text-center font-medium">
+                <div className="flex items-center justify-center w-48 h-2/3 bg-blue-100 rounded-lg px-1 mx-3 text-sm text-center font-medium">
                     <span className={`block w-1/2 mx-1 py-1 cursor-pointer transition duration-200 ease-out ${isWeekSelected ? 'rounded-md shadow-lg text-indigo-500 bg-white' : 'text-gray-400'}`} onClick={e => selectWeekOrMonth(e, true)}>Week</span>
                     <span className={`block w-1/2 mx-1 py-1 cursor-pointer transition duration-200 ease-out ${!isWeekSelected ? 'rounded-md shadow-lg text-indigo-500 bg-white' : 'text-gray-400'}`} onClick={e => selectWeekOrMonth(e, false)}>History</span>
                 </div>
 
                 <span className="w-10 h-10 bg-indigo-500 rounded-lg cursor-pointer select-none hover:shadow-md"><p className="text-3xl font-light flex items-center justify-center text-white" onClick={() => toggleAddNewNote()}>+</p></span>
 
-                <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 top-16 rounded-lg select-none z-10 shadow-xl backdrop-filter backdrop-blur-2xl border border-gray-300 border-opacity-25`}>
+                <div className={`transform ${isFormVisible ? 'scale-100' : 'scale-0'} origin-top-right transition duration-75 ease-out absolute w-64 right-0 top-16 rounded-lg select-none z-10 shadow-xl backdrop-filter backdrop-blur-2xl border border-gray-300 border-opacity-25`}>
 
                     <form onSubmit={e => handleSubmit(e)} className="p-5">
                         {/* <input className={"w-full h-8 p-2 my-2 rounded-md outline-none"} name="author" placeholder="Author" type="text" /> */}
