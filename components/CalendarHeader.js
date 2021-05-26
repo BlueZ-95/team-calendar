@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import { currentDate, currentYear, currentMonth } from "../Utilities/date_time_utils";
 
-function CalendarHeader({ addNote, currentWeekDates }) {
+function CalendarHeader({ addNote, currentWeekDates, isMyCardsFilterEnabled, toggleOnlyMyCards }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
-    const [isMyCardsFilterEnabled, setIsMyCardsFilterEnabled] = useState(false);
+    // const [isMyCardsFilterEnabled, setIsMyCardsFilterEnabled] = useState(false);
 
     const [cardValues, setCardValues] = useState({
         date: currentDate,
@@ -28,8 +28,9 @@ function CalendarHeader({ addNote, currentWeekDates }) {
         setIsWeekSelected(isWeekSelected);
     }
 
-    const toggleMyCardsFilter = () => {
-        setIsMyCardsFilterEnabled(isMyCardsFilterEnabled ? false : true);
+    const toggleMyCardsFilter = e => {
+        console.log('CalendarHeader', isMyCardsFilterEnabled);
+        toggleOnlyMyCards(isMyCardsFilterEnabled ? false : true);
     }
 
     const toggleAddNewNote = () => {

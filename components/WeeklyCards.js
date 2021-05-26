@@ -1,7 +1,8 @@
 import Card from "./Card";
 import { currentDate } from "../Utilities/date_time_utils";
 
-function WeeklyCards({ notes, currentWeekDates, weekDays }) {
+function WeeklyCards({ notes, currentWeekDates, weekDays, isMyCardsFilterEnabled }) {
+    console.log(isMyCardsFilterEnabled);
 
     return (
         <div className="w-full max-h-75 overflow-hidden overflow-y-scroll scrollbar-hide flex mt-5">

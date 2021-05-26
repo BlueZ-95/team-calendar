@@ -121,13 +121,18 @@ function Calendar() {
 
         }).catch(err => {
             console.log(err);
-        })
+        });
+    }
+
+    const toggleOnlyMyCards = (toggleOnlyMyCards) => {
+        console.log('Calendar', toggleOnlyMyCards);
+        setIsMyCardsFilterEnabled(toggleOnlyMyCards)
     }
 
     return (
         <div className="w-full h-full min-h-75 flex flex-col items-center justify-self-start px-10">
-            <CalendarHeader addNote={addNote} currentWeekDates={currentweekDates} />
-            <WeeklyCards notes={notes} currentWeekDates={currentweekDates} weekDays={weekDays} />
+            <CalendarHeader addNote={addNote} currentWeekDates={currentweekDates} isMyCardsFilterEnabled={isMyCardsFilterEnabled} toggleOnlyMyCards={toggleOnlyMyCards} />
+            <WeeklyCards notes={notes} currentWeekDates={currentweekDates} weekDays={weekDays} isMyCardsFilterEnabled={isMyCardsFilterEnabled} />
         </div>
     )
 }
