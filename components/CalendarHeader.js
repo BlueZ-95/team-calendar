@@ -4,7 +4,6 @@ import { currentDate, currentYear, currentMonth } from "../Utilities/date_time_u
 function CalendarHeader({ addNote, currentWeekDates, isMyCardsFilterEnabled, toggleOnlyMyCards }) {
     const [isWeekSelected, setIsWeekSelected] = useState(true);
     const [isFormVisible, setIsFormVisible] = useState(false);
-    // const [isMyCardsFilterEnabled, setIsMyCardsFilterEnabled] = useState(false);
 
     const [cardValues, setCardValues] = useState({
         date: currentDate,
@@ -20,7 +19,6 @@ function CalendarHeader({ addNote, currentWeekDates, isMyCardsFilterEnabled, tog
         var _cardValues = { ...cardValues };
         _cardValues[e.target.name] = value;
         cardValuesRef.current = _cardValues;
-        console.log('Ref', cardValuesRef.current);
         setCardValues(cardValuesRef.current);
     }
 
@@ -29,7 +27,6 @@ function CalendarHeader({ addNote, currentWeekDates, isMyCardsFilterEnabled, tog
     }
 
     const toggleMyCardsFilter = e => {
-        console.log('CalendarHeader', isMyCardsFilterEnabled);
         toggleOnlyMyCards(isMyCardsFilterEnabled ? false : true);
     }
 
