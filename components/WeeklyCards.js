@@ -1,9 +1,15 @@
 import Card from "./Card";
 import { currentDate } from "../Utilities/date_time_utils";
+import { useEffect } from "react";
 
 function WeeklyCards({ notes, currentWeekDates, weekDays, isMyCardsFilterEnabled }) {
 
-    let currentUser = JSON.parse(localStorage.getItem('userDetails')).userDetails;
+    let currentUser;
+    useEffect(() => {
+        if (!currentUser)
+            currentUser = JSON.parse(localStorage.getItem('userDetails')).userDetails;
+    }, [])
+
 
     return (
         <div className="w-full max-h-75 overflow-hidden overflow-y-scroll scrollbar-hide flex mt-5">
