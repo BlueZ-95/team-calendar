@@ -5,11 +5,11 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        'c1': '10rem',
-        'c2': '12rem',
-        'c3': '14rem',
-        'c4': '16rem',
-        'c5': '18rem',
+        'c1': '12rem',
+        'c2': '14rem',
+        'c3': '16rem',
+        'c4': '18rem',
+        'c5': '20rem',
       },
       minHeight: {
         '75': '75vh',
