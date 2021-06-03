@@ -66,11 +66,12 @@ function Calendar() {
         const month = currentMonth;
 
         //check if slot is booked
+        console.log(bookedSlots);
         if (bookedSlots[day].length > 0) {
             for (let i = 0; i < duration; i++) {
                 let hourToAdd = hour + i;
                 hourToAdd = hourToAdd > 12 ? hourToAdd - 12 : hourToAdd;
-                if (bookedSlots[day].indexOf(hourToAdd) == -1) {
+                if (bookedSlots[day].indexOf(hourToAdd) !== -1) {
                     alert('You already assigned a task at this time slot');
                     return;
                 }
@@ -117,12 +118,10 @@ function Calendar() {
 
     function setBookedSlotsArray(day, hour, duration) {
         for (let i = 0; i < duration; i++) {
-            console.log('iteration ' + i, day, hour, duration);
             let hourToAdd = hour + i;
             hourToAdd = hourToAdd > 12 ? hourToAdd - 12 : hourToAdd;
             day.push(hourToAdd);
         }
-        console.log('loop', duration, day);
         return day;
     }
 
