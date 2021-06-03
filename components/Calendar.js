@@ -36,7 +36,6 @@ function Calendar() {
 
                     //set booked slots
                     if (JSON.parse(localStorage.getItem('userDetails')).userDetails.userName == data.author) {
-                        //_bookedSlots[data.day].push({ 'hour': parseInt(data.hour), 'duration': parseInt(data.duration) });
                         _bookedSlots[data.day] = setBookedSlotsArray(_bookedSlots[data.day], parseInt(data.hour), parseInt(data.duration))
                     }
 
@@ -46,16 +45,14 @@ function Calendar() {
 
                 setBookedSlots(_bookedSlots);
                 setNotes(notes);
-
                 setCurrentweekDates(currentWeekDays);
-                //
-
             });
         }
     }, [notes]);
 
     const addNote = (e, cardValues) => {
         e.preventDefault();
+
         const date = cardValues.date;
         const cardContent = cardValues.cardContent;
 
@@ -69,14 +66,11 @@ function Calendar() {
         const month = currentMonth;
 
         //check if slot is booked
-        //console.log(bookedSlots);
-        for (let i = 0; i < duration; i++) {
-            let hourToAdd = hour + i;
-            hourToAdd = hourToAdd > 12 ? hourToAdd - 12 : hourToAdd;
-            console.log('Outer', i, hourToAdd);
-            for (let j = 0; j < bookedSlots[day].length; j++) {
-                console.log('Inner', j, bookedSlots[day][j]);
-                if (hourToAdd == bookedSlots[day][j]) {
+        if (bookedSlots[day].length > 0) {
+            for (let i = 0; i < duration; i++) {
+                let hourToAdd = hour + i;
+                hourToAdd = hourToAdd > 12 ? hourToAdd - 12 : hourToAdd;
+                if (bookedSlots[day].indexOf(hourToAdd) == -1) {
                     alert('You already assigned a task at this time slot');
                     return;
                 }
@@ -111,14 +105,10 @@ function Calendar() {
 
             //Update booked slot
             let _bookedSlots = bookedSlots;
-            //_bookedSlots[day].push({ 'hour': parseInt(hour), 'duration': parseInt(duration) });
             _bookedSlots[day] = setBookedSlotsArray(_bookedSlots[day], parseInt(hour), parseInt(duration));
 
             setBookedSlots({ ..._bookedSlots });
-
             setNotes({ ..._notes });
-
-            console.log(_bookedSlots);
 
         }).catch(err => {
             console.log(err);
