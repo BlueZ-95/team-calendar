@@ -1,13 +1,13 @@
 import Card from "./Card";
 import { currentDate } from "../Utilities/date_time_utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function WeeklyCards({ notes, currentWeekDates, weekDays, isMyCardsFilterEnabled }) {
 
-    let currentUser;
+    const [currentUser, setCurrentUser] = useState({})
     useEffect(() => {
-        if (!currentUser)
-            currentUser = JSON.parse(localStorage.getItem('userDetails')).userDetails;
+        if (currentUser)
+            setCurrentUser(JSON.parse(localStorage.getItem('userDetails')).userDetails);
     }, [])
 
 

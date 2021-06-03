@@ -37,7 +37,6 @@ function CalendarHeader({ addNote, currentWeekDates, isMyCardsFilterEnabled, tog
 
     const handleSubmit = e => {
         e.preventDefault();
-        //let selectedDay = e.target.date.selectedIndex;
         addNote(e, cardValuesRef.current);
         setIsFormVisible(false);
     }
