@@ -36,11 +36,14 @@ function Calendar() {
 
                     //set booked slots
                     if (JSON.parse(localStorage.getItem('userDetails')).userDetails.userName == data.author) {
-                        _bookedSlots[data.day].push({ 'hour': parseInt(data.hour), 'duration': parseInt(data.duration) });
+                        //_bookedSlots[data.day].push({ 'hour': parseInt(data.hour), 'duration': parseInt(data.duration) });
+                        _bookedSlots[data.day] = setBookedSlotsArray(_bookedSlots[data.day], parseInt(data.hour), parseInt(data.duration))
                     }
 
+                    console.log('useEffect', _bookedSlots);
                     notes[data.day].push(data);
                 });
+
                 setBookedSlots(_bookedSlots);
                 setNotes(notes);
 
@@ -60,31 +63,25 @@ function Calendar() {
         const author = userDetails.userName;
 
         const day = weekDays[currentWeekDays.indexOf(parseInt(cardValues.date))];
-        const hour = cardValues.hour;
+        const hour = parseInt(cardValues.hour);
         const duration = cardValues.duration;
 
         const month = currentMonth;
 
-        let enableAddCard = true;
         //check if slot is booked
-        bookedSlots[day].forEach(slots => {
-            for (let i = 0; i < slots.duration; i++) {
-                let _hour = slots.hour;
-                _hour += i;
-
-                //If slot time is after 12:00 set it from 1:00
-                _hour = _hour > 12 ? _hour - 12 : _hour;
-
-                if (_hour == hour) {
+        //console.log(bookedSlots);
+        for (let i = 0; i < duration; i++) {
+            let hourToAdd = hour + i;
+            hourToAdd = hourToAdd > 12 ? hourToAdd - 12 : hourToAdd;
+            console.log('Outer', i, hourToAdd);
+            for (let j = 0; j < bookedSlots[day].length; j++) {
+                console.log('Inner', j, bookedSlots[day][j]);
+                if (hourToAdd == bookedSlots[day][j]) {
                     alert('You already assigned a task at this time slot');
-                    enableAddCard = false;
-                    break;
+                    return;
                 }
             }
-        });
-
-        if (!enableAddCard)
-            return;
+        }
 
         firestore.collection('notes').add({
             author: author,
@@ -114,15 +111,29 @@ function Calendar() {
 
             //Update booked slot
             let _bookedSlots = bookedSlots;
-            _bookedSlots[day].push({ 'hour': parseInt(hour), 'duration': parseInt(duration) });
+            //_bookedSlots[day].push({ 'hour': parseInt(hour), 'duration': parseInt(duration) });
+            _bookedSlots[day] = setBookedSlotsArray(_bookedSlots[day], parseInt(hour), parseInt(duration));
 
             setBookedSlots({ ..._bookedSlots });
 
             setNotes({ ..._notes });
 
+            console.log(_bookedSlots);
+
         }).catch(err => {
             console.log(err);
         });
+    }
+
+    function setBookedSlotsArray(day, hour, duration) {
+        for (let i = 0; i < duration; i++) {
+            console.log('iteration ' + i, day, hour, duration);
+            let hourToAdd = hour + i;
+            hourToAdd = hourToAdd > 12 ? hourToAdd - 12 : hourToAdd;
+            day.push(hourToAdd);
+        }
+        console.log('loop', duration, day);
+        return day;
     }
 
     const toggleOnlyMyCards = (toggleOnlyMyCards) => {
